@@ -97,9 +97,19 @@ server.delete("/api/users/:id", (req, res) => {
   const { id } = req.params;
   // to get dynamic id for deletion
   Hubs.remove(id)
-    .then(user => {})
-    .catch(error => {
-      res.status(500).json({ errorMessage: "The user could not be removed" });
+    .then(user => {
+      // EXAMPLE USING TERNARY STATEMENT
+      user
+        ? res.status(200).json(user)
+        : res.status(404).json({
+            errorMessage: "The user with the specified ID does not exist."
+          });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        errorMessage: "The user could not be removed"
+      });
     });
 });
 
