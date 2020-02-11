@@ -1,4 +1,6 @@
 // implement your API here
+
+// req.body is the shape of the data object
 // STEP 1:
 const express = require("express");
 
@@ -13,6 +15,7 @@ server.use(express.json()); // needed for POST, PUT/PATCH
 
 server.get("/api/users", (req, res) => {
   // needed to get hubs from database (db.js)
+
   Hubs.find()
     .then(hubs => {
       res.status(200).json(hubs);
